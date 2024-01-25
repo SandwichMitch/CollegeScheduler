@@ -20,5 +20,11 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/assignments_fragment" />
         <!-- This is slideshow fragment, will be assignments and exams list -->
+
+        <item
+            android:id="@+id/nav_exams"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/exams" />
+
     </group>
 </menu>

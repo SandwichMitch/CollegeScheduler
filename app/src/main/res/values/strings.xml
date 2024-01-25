@@ -15,4 +15,6 @@
     <string name="todo_fragment">To-Do List</string>
     <string name="classes_fragment">Classes</string>
     <string name="assignments_fragment">Assignments</string>
+    <string name="classes">Classes</string>
+    <string name="exams">Exams</string>
 </resources>
