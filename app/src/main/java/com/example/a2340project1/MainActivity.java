@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a2340project1.databinding.ActivityMainBinding;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public void onAddToDo(View v) {
+        v.findViewById(R.id.todo_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        } );
+
     }
 
     @Override
