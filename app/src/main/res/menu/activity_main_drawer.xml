@@ -20,5 +20,6 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/assignments_fragment" />
         <!-- This is slideshow fragment, will be assignments and exams list -->
+        <!-- This change was made in esha branch -->
     </group>
 </menu>
