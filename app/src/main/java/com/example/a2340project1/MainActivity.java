@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +58,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onAddToDo(View v) {
-        v.findViewById(R.id.todo_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        } );
-
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
