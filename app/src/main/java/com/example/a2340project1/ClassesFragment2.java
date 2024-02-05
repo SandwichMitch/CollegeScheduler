@@ -135,7 +135,7 @@ public class ClassesFragment2 extends Fragment {
                     // on below line we are adding item to our list.
                     classStringList.remove(aggregate);
 
-                    ClassesData newClass = new ClassesData(aggregate);
+                    ClassesData newClass = new ClassesData(item);
                     classList.remove(newClass);
 
                     // on below line we are notifying adapter
@@ -172,8 +172,14 @@ public class ClassesFragment2 extends Fragment {
 
                         ArrayAdapter adapter = (ArrayAdapter) parent.getAdapter();
                         adapter.insert(input.getText().toString(), position);
+
                         classList.get(position).setClassName(input.getText().toString());
+//                         ClassesData newClass = new ClassesData(input.getText().toString());
+//                         classList.add(newClass);
                         adapter.remove(item);
+//                         String[] splitted = item.split("\\s+");
+//                         ClassesData removeClass = new ClassesData(splitted[0]);
+//                         classList.remove(removeClass);
                     }
                 });
 
