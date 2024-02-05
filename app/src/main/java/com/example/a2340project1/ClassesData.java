@@ -11,8 +11,8 @@ public class ClassesData {
     public ClassesData(String className) {
         this.className = className;
         this.examList = new ArrayList<>();
-        examList.add(new Exam("Test Exam", 1, 1, "Howey"));
-        examList.add(new Exam("Test Exam 2", 1, 2, "Culc"));
+        examList.add(new Exam("Test Exam", 1, 1, "8 am", "Howey"));
+        examList.add(new Exam("Test Exam 2", 1, 2, "12 pm","CULC"));
         this.assignmentList = new ArrayList<>();
     }
 

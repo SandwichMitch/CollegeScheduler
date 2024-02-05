@@ -42,6 +42,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder
         Exam exam = examList.get(position);
         holder.examNameTextView.setText(exam.getTaskName());
         holder.examDateTextView.setText(exam.getDueDate());
+        holder.examTimeTextView.setText(exam.getTime());
         holder.examLocationTextView.setText(exam.getLocation());
 
         // Set an OnClickListener for each item
@@ -67,12 +68,14 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder
     public static class ExamViewHolder extends RecyclerView.ViewHolder {
         TextView examNameTextView;
         TextView examDateTextView;
+        TextView examTimeTextView;
         TextView examLocationTextView;
 
         public ExamViewHolder(@NonNull View itemView) {
             super(itemView);
             examNameTextView = itemView.findViewById(R.id.examNameTextView);
             examDateTextView = itemView.findViewById(R.id.examDateTextView);
+            examTimeTextView = itemView.findViewById(R.id.examTimeTextView);
             examLocationTextView = itemView.findViewById(R.id.examLocationTextView);
         }
     }
