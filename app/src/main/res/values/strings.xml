@@ -17,4 +17,5 @@
     <string name="assignments_fragment">Assignments</string>
     <string name="classes">Classes</string>
     <string name="exams">Exams</string>
+    <string name="add_exam">Add Exam</string>
 </resources>
