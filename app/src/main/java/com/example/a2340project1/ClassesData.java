@@ -14,7 +14,11 @@ public class ClassesData {
         this.assignmentList = new ArrayList<>();
     }
 
-    public void addExam(String examName, int examMonth, int examDay, String classTag) {
+    public void addExam(Exam exam) {
+        this.examList.add(exam);
+    }
 
+    public void addAssignment(Assignment assignment) {
+        this.assignmentList.add(assignment);
     }
 }
