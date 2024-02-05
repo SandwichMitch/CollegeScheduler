@@ -172,6 +172,7 @@ public class ClassesFragment2 extends Fragment {
 
                         ArrayAdapter adapter = (ArrayAdapter) parent.getAdapter();
                         adapter.insert(input.getText().toString(), position);
+                        classList.get(position).setClassName(input.getText().toString());
                         adapter.remove(item);
                     }
                 });

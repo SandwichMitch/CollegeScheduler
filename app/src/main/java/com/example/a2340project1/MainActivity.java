@@ -23,18 +23,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Spinner dropdown;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /* Spinner dropdown = findViewById(R.id.examsDropDown);
-        List<String> classesOptions = ClassesFragment2.classStringList;
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, classesOptions);
-        dropdown.setAdapter(adapter); */
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -52,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
