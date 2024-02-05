@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -98,7 +100,7 @@ public class ClassesFragment2 extends Fragment {
                 String time = timeEdt.getText().toString();
                 String instructor = instructorEdt.getText().toString();
 
-                String aggregate = item + "  " + time + "  " + instructor;
+                String aggregate = item + " " + time + " " + instructor;
                 if (!item.isEmpty() && !time.isEmpty() && !instructor.isEmpty() && !classStringList.contains(aggregate)) {
 
                     // on below line we are adding item to our list.
@@ -112,6 +114,10 @@ public class ClassesFragment2 extends Fragment {
                     // update our list view.
                     classArrayAdapter.notifyDataSetChanged();
                 }
+                else if (classStringList.contains(aggregate)) {
+                    Snackbar.make(view, "This class already exists!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
 
             }
         });
@@ -123,7 +129,7 @@ public class ClassesFragment2 extends Fragment {
                 String time = timeEdt.getText().toString();
                 String instructor = instructorEdt.getText().toString();
 
-                String aggregate = item + "  " + time + "  " + instructor;  
+                String aggregate = item + " " + time + " " + instructor;
                 if (!item.isEmpty() && classStringList.contains(aggregate)) {
 
                     // on below line we are adding item to our list.
@@ -138,8 +144,49 @@ public class ClassesFragment2 extends Fragment {
                     classArrayAdapter.notifyDataSetChanged();
                 }
 
+                else if (!classStringList.contains(aggregate)) {
+                    Snackbar.make(view, "This class doesn't exist!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
+
+        languageLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) parent.getItemAtPosition(position);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle("Edit:");
+                alert.setMessage("Edit the class here:");
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(getContext());
+                input.setText(item);
+                alert.setView(input);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        ArrayAdapter adapter = (ArrayAdapter) parent.getAdapter();
+                        adapter.insert(input.getText().toString(), position);
+                        adapter.remove(item);
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+
+                alert.show();
+            }
+        });
+
+
 
         return view;
     }
