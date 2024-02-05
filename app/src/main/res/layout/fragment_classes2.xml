@@ -73,7 +73,7 @@
                 android:layout_below="@id/idEdtItemTime"
                 android:layout_margin="4dp"
                 android:layout_toLeftOf="@id/floatingActionButton2"
-                android:hint="Enter course instructor to add in ist" />
+                android:hint="Enter course instructor to add in list" />
 
         </TableRow>
 

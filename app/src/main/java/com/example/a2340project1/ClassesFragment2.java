@@ -172,12 +172,14 @@ public class ClassesFragment2 extends Fragment {
 
                         ArrayAdapter adapter = (ArrayAdapter) parent.getAdapter();
                         adapter.insert(input.getText().toString(), position);
-                        ClassesData newClass = new ClassesData(input.getText().toString());
-                        classList.add(newClass);
+
+                        classList.get(position).setClassName(input.getText().toString());
+//                         ClassesData newClass = new ClassesData(input.getText().toString());
+//                         classList.add(newClass);
                         adapter.remove(item);
-                        String[] splitted = item.split("\\s+");
-                        ClassesData removeClass = new ClassesData(splitted[0]);
-                        classList.remove(removeClass);
+//                         String[] splitted = item.split("\\s+");
+//                         ClassesData removeClass = new ClassesData(splitted[0]);
+//                         classList.remove(removeClass);
                     }
                 });
 

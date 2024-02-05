@@ -1,13 +1,12 @@
 package com.example.a2340project1;
 
 public class Exam extends Task {
-    public String classTag;
-    public Exam(String taskName, int dueMonth, int dueDay, String classTag) {
-        super(taskName, dueMonth, dueDay);
-        this.classTag = classTag;
+
+    private String location;
+    public Exam(String taskName, int dueMonth, int dueDay, String time, String location) {
+        super(taskName, dueMonth, dueDay, time);
+        this.location = location;
     }
 
-    public String getClassTag() {
-        return this.classTag;
-    }
+    public String getLocation() {return this.location; }
 }
