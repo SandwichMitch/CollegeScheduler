@@ -1,13 +1,9 @@
 package com.example.a2340project1;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -16,17 +12,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2340project1.databinding.ActivityMainBinding;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.a2340project1.Adapter.ToDoAdapter;
-import com.example.a2340project1.Model.ToDoModel;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

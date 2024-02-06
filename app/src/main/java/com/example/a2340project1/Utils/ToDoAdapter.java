@@ -1,4 +1,4 @@
-package com.example.a2340project1.Adapter;
+package com.example.a2340project1.Utils;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2340project1.AddNewTask;
 import com.example.a2340project1.HomeFragment;
-import com.example.a2340project1.Model.ToDoModel;
 import com.example.a2340project1.R;
-import com.example.a2340project1.Utils.DatabaseHandler;
 
 import java.util.List;
 

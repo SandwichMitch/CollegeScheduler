@@ -7,8 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.a2340project1.Model.ToDoModel;
-
 import java.util.ArrayList;
 import java.util.List;
 

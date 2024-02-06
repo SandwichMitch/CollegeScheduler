@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a2340project1.Adapter.ToDoAdapter;
-import com.example.a2340project1.Model.ToDoModel;
+import com.example.a2340project1.Utils.ToDoAdapter;
+import com.example.a2340project1.Utils.ToDoModel;
 import com.example.a2340project1.Utils.DatabaseHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

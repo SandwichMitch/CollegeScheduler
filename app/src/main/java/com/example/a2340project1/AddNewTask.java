@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.a2340project1.Model.ToDoModel;
+import com.example.a2340project1.Utils.ToDoModel;
 import com.example.a2340project1.Utils.DatabaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 

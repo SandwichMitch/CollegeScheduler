@@ -1,4 +1,4 @@
-package com.example.a2340project1.Model;
+package com.example.a2340project1.Utils;
 
 public class ToDoModel {
 
