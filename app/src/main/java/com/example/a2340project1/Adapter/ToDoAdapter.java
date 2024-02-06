@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2340project1.AddNewTask;
@@ -22,24 +23,26 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     private List<ToDoModel> todoList;
     private HomeFragment activity;
-    private DatabaseHandler database;
+    private final DatabaseHandler db;
 
 
-    public ToDoAdapter(DatabaseHandler database, HomeFragment activity) {
+    public ToDoAdapter(DatabaseHandler db, HomeFragment activity) {
         this.activity = activity;
-        this.database = database;
+        this.db = db;
     }
-
+    @NonNull
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_layout, parent, false);
         return new ViewHolder(itemView);
     }
 
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        database.openDatabase();
+        db.openDatabase();
 
-        ToDoModel item = todoList.get(position);
+        final ToDoModel item = todoList.get(position);
 
         holder.task.setText(item.getTask());
 
@@ -49,9 +52,9 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    database.updateStatus(item.getId(), 1);
+                    db.updateStatus(item.getId(), 1);
                 } else {
-                    database.updateStatus(item.getId(), 0);
+                    db.updateStatus(item.getId(), 0);
                 }
             }
         });
@@ -82,7 +85,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     public void deleteItem(int position) {
         ToDoModel item = todoList.get(position);
-        database.deleteTask(item.getId());
+        db.deleteTask(item.getId());
         todoList.remove(position);
         notifyItemRemoved(position);
     }
@@ -95,6 +98,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         AddNewTask fragment = new AddNewTask();
         fragment.setArguments(bundle);
         fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
+
     }
 
 
