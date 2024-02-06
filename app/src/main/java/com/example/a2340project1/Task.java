@@ -20,8 +20,14 @@ public class Task {
     public String getTaskName() {
         return taskName;
     }
+    public void setTaskName(String newName) {this.taskName = newName; }
+    public int getDueMonth() {return dueMonth; }
+    public void setDueMonth(int newMonth) {this.dueMonth = newMonth; }
+    public int getDueDay() {return dueDay; }
+    public void setDueDay(int newDay) {this.dueDay = newDay; }
     public String getDueDate() {
         return (dueMonth + "/" + dueDay);
     }
     public String getTime() {return time; }
+    public void setTime(String newTime) {this.time = newTime; }
 }

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class ExamsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public ClassesData currentClassData;
+    public Exam currentExam;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -43,6 +45,13 @@ public class ExamsFragment extends Fragment {
     private EditText dayEdt;
     private EditText timeEdt;
     private EditText locationEdt;
+
+    private EditText chngtopicEdt;
+    private EditText chngdateEdt;
+    private EditText chngdayEdt;
+    private EditText chngtimeEdt;
+    private EditText chnglocationEdt;
+    private boolean classSelected;
 
     public ExamsFragment() {
         // Required empty public constructor
@@ -89,6 +98,9 @@ public class ExamsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TableLayout examSettings = view.findViewById(R.id.examSettings);
+        ConstraintLayout examList = view.findViewById(R.id.examsList);
+
         //set up recycler view
         RecyclerView recyclerViewExams = view.findViewById(R.id.recyclerView);
         recyclerViewExams.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -97,10 +109,81 @@ public class ExamsFragment extends Fragment {
         defaultList.add(new Exam("No Valid Class Selected", 1, 1,
                 "N/A", "N/A"));
         ExamAdapter examAdapter = new ExamAdapter(this.getContext(), new ArrayList<>());
+
+        TableLayout editExam = view.findViewById(R.id.examEdit);
+        chngtopicEdt = view.findViewById(R.id.editExamTopic);
+        chngdateEdt = view.findViewById(R.id.editExamDate);
+        chngdayEdt = view.findViewById(R.id.editExamDateDay);
+        chngtimeEdt = view.findViewById(R.id.editExamTime);
+        chnglocationEdt = view.findViewById(R.id.editExamLocation);
+
+
         examAdapter.setOnItemClickListener(new ExamAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Exam exam) {
+                editExam.setVisibility(View.VISIBLE);
+                examList.setVisibility(View.GONE);
+                currentExam = exam;
+                Button confirmDelete = view.findViewById(R.id.confirmDeleteButton);
 
+                chngtopicEdt.setText(currentExam.getTaskName());
+                chngdateEdt.setText(String.valueOf(currentExam.getDueMonth()));
+                chngdayEdt.setText(String.valueOf(currentExam.getDueDay()));
+                chngtimeEdt.setText(currentExam.getTime());
+                chnglocationEdt.setText(currentExam.getLocation());
+                confirmDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentClassData.removeExam(currentExam);
+                        examAdapter.updateData(currentClassData.examList);
+
+                        editExam.setVisibility(View.GONE);
+                        examList.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                Button confirmEdit = view.findViewById(R.id.confirmEditButton);
+                confirmEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String topic = chngtopicEdt.getText().toString();
+                        int month;
+                        int day;
+                        if (chngdateEdt.getText().length() == 0 || chngdayEdt.getText().length() == 0) {
+                            month = 0;
+                            day = 0;
+                        } else {
+                            try {
+                                month = Integer.parseInt(chngdateEdt.getText().toString());
+                                day = Integer.parseInt(chngdayEdt.getText().toString());
+                            } catch (NumberFormatException invalidDate) {
+                                month = 0;
+                                day = 0;
+                            }
+
+                        }
+
+                        String time = chngtimeEdt.getText().toString();
+                        String location = chnglocationEdt.getText().toString();
+                        if ((topic.compareTo("") == 0) || (month == 0) || (day == 0)
+                                || (time.compareTo("") == 0) || (location.compareTo("") == 0)) {
+                            Toast noneSelected = Toast.makeText(getContext(), "One or more fields are empty or invalid!", Toast.LENGTH_LONG);
+                            noneSelected.show();
+                        } else {
+                            currentExam.setTaskName(chngtopicEdt.getText().toString());
+                            currentExam.setDueMonth(Integer.parseInt(chngdateEdt.getText().toString()));
+                            currentExam.setDueDay(Integer.parseInt(chngdayEdt.getText().toString()));
+                            currentExam.setTime(chngtimeEdt.getText().toString());
+                            currentExam.setLocation(chnglocationEdt.getText().toString());
+
+                            examAdapter.updateData(currentClassData.examList);
+
+                            editExam.setVisibility(View.GONE);
+                            examList.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+                });
             }
         });
         recyclerViewExams.setAdapter(examAdapter);
@@ -118,25 +201,33 @@ public class ExamsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentClassData = classDataOptions.get(position);
                 List<Exam> currentExamList = currentClassData.getExamList();
+                classSelected = true;
 
                 examAdapter.updateData(currentExamList);
             }
 
             public void onNothingSelected(AdapterView<?> parentView) {
                 examAdapter.updateData(defaultList);
+                classSelected = false;
             }
         });
+
+
 
         //set up add exam button
         Button addExam = view.findViewById(R.id.addExam);
 
-        TableLayout examSettings = view.findViewById(R.id.examSettings);
-        ConstraintLayout examList = view.findViewById(R.id.examsList);
+
         addExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                examSettings.setVisibility(View.VISIBLE);
-                examList.setVisibility(View.GONE);
+                if (!classSelected) {
+                    Toast noneSelected = Toast.makeText(getContext(), "No class selected to add class to!", Toast.LENGTH_LONG);
+                    noneSelected.show();
+                } else {
+                    examSettings.setVisibility(View.VISIBLE);
+                    examList.setVisibility(View.GONE);
+                }
 
             }
         });
@@ -156,19 +247,42 @@ public class ExamsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String topic = topicEdt.getText().toString();
-                int month = Integer.parseInt(dateEdt.getText().toString());
-                int day = Integer.parseInt(dayEdt.getText().toString());
+                int month;
+                int day;
+                if (dateEdt.getText().length() == 0 || dayEdt.getText().length() == 0) {
+                    month = 0;
+                    day = 0;
+                } else {
+                    try {
+                        month = Integer.parseInt(dateEdt.getText().toString());
+                        day = Integer.parseInt(dayEdt.getText().toString());
+                    } catch (NumberFormatException invalidDate) {
+                        month = 0;
+                        day = 0;
+                    }
+
+                }
+
                 String time = timeEdt.getText().toString();
                 String location = locationEdt.getText().toString();
+                if ((topic.compareTo("") == 0) || (month == 0) || (day == 0)
+                        || (time.compareTo("") == 0) || (location.compareTo("") == 0)) {
+                    Toast noneSelected = Toast.makeText(getContext(), "One or more fields are empty or invalid!", Toast.LENGTH_LONG);
+                    noneSelected.show();
+                } else {
+                    Exam newExam = new Exam(topic, month, day, time, location);
+                    currentClassData.addExam(newExam);
+                    examAdapter.updateData(currentClassData.examList);
 
-                Exam newExam = new Exam(topic, month, day, time, location);
-                currentClassData.addExam(newExam);
-                examAdapter.updateData(currentClassData.examList);
+                    examSettings.setVisibility(View.GONE);
+                    examList.setVisibility(View.VISIBLE);
+                }
 
-                examSettings.setVisibility(View.GONE);
-                examList.setVisibility(View.VISIBLE);
             }
         });
+
+
+
 
 
     }

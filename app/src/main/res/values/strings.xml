@@ -27,4 +27,6 @@
     <string name="enter_exam_date_m_d">Enter Exam Date (M/D)</string>
     <string name="enter_exam_month">Enter Exam Month</string>
     <string name="enter_exam_day">Enter Exam Day</string>
+    <string name="delete">Delete</string>
+    <string name="confirm">Confirm</string>
 </resources>

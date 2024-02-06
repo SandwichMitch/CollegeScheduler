@@ -90,6 +90,100 @@
 
     </TableLayout>
 
+    <TableLayout
+        android:id="@+id/examEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="100dp"
+        android:visibility="gone">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/editExamTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_exam_topic" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/editExamDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtExamTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_exam_month" />
+            <EditText
+                android:id="@+id/editExamDateDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtExamTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_exam_day" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+            <EditText
+                android:id="@+id/editExamTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtExamDate"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_exam_time" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+            <EditText
+                android:id="@+id/editExamLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtExamTime"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_exam_location" />
+
+        </TableRow>
+
+
+
+        <Button
+            android:id="@+id/confirmEditButton"
+            android:text="@string/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            />
+
+        <Button
+            android:id="@+id/confirmDeleteButton"
+            android:text="@string/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            />
+
+    </TableLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/examsList"
         android:layout_width="match_parent"
@@ -109,7 +203,7 @@
         <Spinner
             android:id="@+id/examsDropDown"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/item_outline"
             android:spinnerMode="dropdown"

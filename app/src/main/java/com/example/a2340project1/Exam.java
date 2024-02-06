@@ -9,4 +9,5 @@ public class Exam extends Task {
     }
 
     public String getLocation() {return this.location; }
+    public void setLocation(String newLoc) {this.location = newLoc; }
 }

@@ -20,6 +20,10 @@ public class ClassesData {
         this.examList.add(exam);
     }
 
+    public void removeExam(Exam exam) {
+        this.examList.remove(exam);
+    }
+
     public void addAssignment(Assignment assignment) {
         this.assignmentList.add(assignment);
     }
