@@ -26,9 +26,10 @@ public class HomeFragment extends AppCompatActivity implements DialogCloseListen
 
     private List<ToDoModel> taskList;
 
-    private DatabaseHandler database;
+    private DatabaseHandler db;
 
     private FloatingActionButton fab;
+
 
 
     @Override
@@ -37,23 +38,25 @@ public class HomeFragment extends AppCompatActivity implements DialogCloseListen
         setContentView(R.layout.activity_main);
         getSupportActionBar();
 
-        database = new DatabaseHandler(this);
-        database.openDatabase();
+        db = new DatabaseHandler(this);
+        db.openDatabase();
 
         taskList = new ArrayList<>();
 
         tasksRecyclerView = findViewById(R.id.toDoList);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        tasksAdapter = new ToDoAdapter(database, this);
+        tasksAdapter = new ToDoAdapter(db, HomeFragment.this);
         tasksRecyclerView.setAdapter(tasksAdapter);
 
 
-        fab = findViewById(R.id.fab);
+
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
-        taskList = database.getAllTasks();
+        fab = findViewById(R.id.fab);
+
+        taskList = db.getAllTasks();
         Collections.reverse(taskList);
         tasksAdapter.setTasks(taskList);
 
@@ -68,9 +71,10 @@ public class HomeFragment extends AppCompatActivity implements DialogCloseListen
     }
 
 
+
     @Override
     public void handleDialogCLose(DialogInterface dialog) {
-        taskList = database.getAllTasks();
+        taskList = db.getAllTasks();
         Collections.reverse(taskList);
         tasksAdapter.setTasks(taskList);
         tasksAdapter.notifyDataSetChanged();
@@ -79,5 +83,5 @@ public class HomeFragment extends AppCompatActivity implements DialogCloseListen
     public void handleDialogClose(DialogInterface dialog) {
 
     }
-}
 
+}
