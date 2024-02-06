@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AssignmentsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout
+        android:id="@+id/assignmentSettings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="100dp"
+        android:visibility="gone">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/idEdtAssignmentTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_name" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/idEdtAssignmentDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_month" />
+            <EditText
+                android:id="@+id/idEdtAssignmentDateDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_day" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+            <EditText
+                android:id="@+id/idEdtAssignmentTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentDate"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_time" />
+
+        </TableRow>
+
+        <Button
+            android:id="@+id/addConfirmAssignment"
+            android:text="@string/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            />
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/assignmentEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="100dp"
+        android:visibility="gone">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/editAssignmentTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_name" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <EditText
+                android:id="@+id/editAssignmentDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_month" />
+            <EditText
+                android:id="@+id/editAssignmentDateDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentTopic"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_day" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+            <EditText
+                android:id="@+id/editAssignmentTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idEdtAssignmentDate"
+                android:layout_margin="4dp"
+                android:hint="@string/enter_assignment_due_time" />
+
+        </TableRow>
+
+
+
+        <Button
+            android:id="@+id/confirmEditAssignmentButton"
+            android:text="@string/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            />
+
+        <Button
+            android:id="@+id/confirmDeleteAssignmentButton"
+            android:text="@string/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            />
+
+    </TableLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/assignmentsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="405dp"
+            android:layout_height="575dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addAssignment" />
+
+        <Spinner
+            android:id="@+id/assignmentsDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/item_outline"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/addAssignment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Button
+            android:id="@+id/addAssignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_assignment"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/assignmentsDropDown" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="156dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="83dp"
+            android:text="@string/choose_class"
+            app:layout_constraintBottom_toTopOf="@+id/assignmentsDropDown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

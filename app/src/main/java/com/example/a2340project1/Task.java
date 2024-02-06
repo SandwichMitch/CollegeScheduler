@@ -1,6 +1,6 @@
 package com.example.a2340project1;
 
-public class Task {
+public class Task implements Comparable<Task> {
     public String taskName;
     public int dueMonth;
     public int dueDay;
@@ -14,6 +14,23 @@ public class Task {
         } else {
             this.dueMonth = dueMonth;
             this.dueDay = dueDay;
+        }
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if (this.dueMonth < other.dueMonth) {
+            return -1;
+        } else if (this.dueMonth > other.dueMonth){
+            return 1;
+        } else if (this.dueDay < other.dueDay) {
+            return -1;
+        }  else if (this.dueMonth == other.dueMonth && this.dueDay > other.dueDay) {
+            return 1;
+        } else if (this.dueMonth == other.dueMonth && this.dueDay == other.dueDay) {
+            return 0;
+        } else {
+            return 0;
         }
     }
 

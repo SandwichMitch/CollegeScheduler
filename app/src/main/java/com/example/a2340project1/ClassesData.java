@@ -1,6 +1,7 @@
 package com.example.a2340project1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClassesData {
@@ -26,11 +27,19 @@ public class ClassesData {
 
     public void addAssignment(Assignment assignment) {
         this.assignmentList.add(assignment);
+        Collections.sort(this.assignmentList);
+    }
+
+    public void removeAssignment(Assignment assignment) {
+        this.assignmentList.remove(assignment);
+        Collections.sort(this.assignmentList);
     }
 
     public List<Exam> getExamList() {
         return this.examList;
     }
+
+    public List<Assignment> getAssignmentList() {return this. assignmentList; }
 
     public void setClassName(String newClassName) {
         this.className = newClassName;
