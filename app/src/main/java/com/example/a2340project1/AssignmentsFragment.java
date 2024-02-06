@@ -24,17 +24,17 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ExamsFragment#newInstance} factory method to
+ * Use the {@link AssignmentsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExamsFragment extends Fragment {
+public class AssignmentsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public ClassesData currentClassData;
-    public Exam currentExam;
+    public Assignment currentAssignment;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -44,16 +44,14 @@ public class ExamsFragment extends Fragment {
     private EditText dateEdt;
     private EditText dayEdt;
     private EditText timeEdt;
-    private EditText locationEdt;
 
     private EditText chngtopicEdt;
     private EditText chngdateEdt;
     private EditText chngdayEdt;
     private EditText chngtimeEdt;
-    private EditText chnglocationEdt;
     private boolean classSelected;
 
-    public ExamsFragment() {
+    public AssignmentsFragment() {
         // Required empty public constructor
     }
 
@@ -63,11 +61,11 @@ public class ExamsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExamsFragment.
+     * @return A new instance of fragment AssignmentsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExamsFragment newInstance(String param1, String param2) {
-        ExamsFragment fragment = new ExamsFragment();
+    public static AssignmentsFragment newInstance(String param1, String param2) {
+        AssignmentsFragment fragment = new AssignmentsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -92,57 +90,57 @@ public class ExamsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_exams, container, false);
+        return inflater.inflate(R.layout.fragment_assignments, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TableLayout examSettings = view.findViewById(R.id.examSettings);
-        ConstraintLayout examList = view.findViewById(R.id.examsList);
+        TableLayout assignmentSettings = view.findViewById(R.id.assignmentSettings);
+        ConstraintLayout assignmentList = view.findViewById(R.id.assignmentsList);
 
         //set up recycler view
-        RecyclerView recyclerViewExams = view.findViewById(R.id.recyclerView);
-        recyclerViewExams.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        RecyclerView recyclerViewAssignments = view.findViewById(R.id.recyclerView);
+        recyclerViewAssignments.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        List<Exam> defaultList = new ArrayList<>();
-        defaultList.add(new Exam("No Valid Class Selected", 1, 1,
-                "N/A", "N/A"));
-        ExamAdapter examAdapter = new ExamAdapter(this.getContext(), new ArrayList<>());
+        List<Assignment> defaultList = new ArrayList<>();
+        defaultList.add(new Assignment("No Valid Class Selected", 1, 1,
+                "N/A"));
+        AssignmentAdapter assignmentAdapter = new AssignmentAdapter(this.getContext(), new ArrayList<>());
 
-        TableLayout editExam = view.findViewById(R.id.examEdit);
-        chngtopicEdt = view.findViewById(R.id.editExamTopic);
-        chngdateEdt = view.findViewById(R.id.editExamDate);
-        chngdayEdt = view.findViewById(R.id.editExamDateDay);
-        chngtimeEdt = view.findViewById(R.id.editExamTime);
-        chnglocationEdt = view.findViewById(R.id.editExamLocation);
+        TableLayout editAssignment = view.findViewById(R.id.assignmentEdit);
+        chngtopicEdt = view.findViewById(R.id.editAssignmentTopic);
+        chngdateEdt = view.findViewById(R.id.editAssignmentDate);
+        chngdayEdt = view.findViewById(R.id.editAssignmentDateDay);
+        chngtimeEdt = view.findViewById(R.id.editAssignmentTime);
 
 
-        examAdapter.setOnItemClickListener(new ExamAdapter.OnItemClickListener() {
+
+        assignmentAdapter.setOnItemClickListener(new AssignmentAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Exam exam) {
-                editExam.setVisibility(View.VISIBLE);
-                examList.setVisibility(View.GONE);
-                currentExam = exam;
-                Button confirmDelete = view.findViewById(R.id.confirmDeleteButton);
+            public void onItemClick(Assignment assignment) {
+                editAssignment.setVisibility(View.VISIBLE);
+                assignmentList.setVisibility(View.GONE);
+                currentAssignment = assignment;
+                Button confirmDelete = view.findViewById(R.id.confirmDeleteAssignmentButton);
 
-                chngtopicEdt.setText(currentExam.getTaskName());
-                chngdateEdt.setText(String.valueOf(currentExam.getDueMonth()));
-                chngdayEdt.setText(String.valueOf(currentExam.getDueDay()));
-                chngtimeEdt.setText(currentExam.getTime());
-                chnglocationEdt.setText(currentExam.getLocation());
+                chngtopicEdt.setText(currentAssignment.getTaskName());
+                chngdateEdt.setText(String.valueOf(currentAssignment.getDueMonth()));
+                chngdayEdt.setText(String.valueOf(currentAssignment.getDueDay()));
+                chngtimeEdt.setText(currentAssignment.getTime());
+
                 confirmDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        currentClassData.removeExam(currentExam);
-                        examAdapter.updateData(currentClassData.examList);
+                        currentClassData.removeAssignment(currentAssignment);
+                        assignmentAdapter.updateData(currentClassData.assignmentList);
 
-                        editExam.setVisibility(View.GONE);
-                        examList.setVisibility(View.VISIBLE);
+                        editAssignment.setVisibility(View.GONE);
+                        assignmentList.setVisibility(View.VISIBLE);
                     }
                 });
 
-                Button confirmEdit = view.findViewById(R.id.confirmEditButton);
+                Button confirmEdit = view.findViewById(R.id.confirmEditAssignmentButton);
                 confirmEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -164,31 +162,30 @@ public class ExamsFragment extends Fragment {
                         }
 
                         String time = chngtimeEdt.getText().toString();
-                        String location = chnglocationEdt.getText().toString();
                         if ((topic.compareTo("") == 0) || (month == 0) || (day == 0)
-                                || (time.compareTo("") == 0) || (location.compareTo("") == 0)) {
+                                || (time.compareTo("") == 0)) {
                             Toast noneSelected = Toast.makeText(getContext(), "One or more fields are empty or invalid!", Toast.LENGTH_LONG);
                             noneSelected.show();
                         } else {
-                            currentExam.setTaskName(chngtopicEdt.getText().toString());
-                            currentExam.setDueMonth(Integer.parseInt(chngdateEdt.getText().toString()));
-                            currentExam.setDueDay(Integer.parseInt(chngdayEdt.getText().toString()));
-                            currentExam.setTime(chngtimeEdt.getText().toString());
-                            currentExam.setLocation(chnglocationEdt.getText().toString());
+                            currentAssignment.setTaskName(chngtopicEdt.getText().toString());
+                            currentAssignment.setDueMonth(Integer.parseInt(chngdateEdt.getText().toString()));
+                            currentAssignment.setDueDay(Integer.parseInt(chngdayEdt.getText().toString()));
+                            currentAssignment.setTime(chngtimeEdt.getText().toString());
 
-                            examAdapter.updateData(currentClassData.examList);
 
-                            editExam.setVisibility(View.GONE);
-                            examList.setVisibility(View.VISIBLE);
+                            assignmentAdapter.updateData(currentClassData.assignmentList);
+
+                            editAssignment.setVisibility(View.GONE);
+                            assignmentList.setVisibility(View.VISIBLE);
                         }
 
                     }
                 });
             }
         });
-        recyclerViewExams.setAdapter(examAdapter);
+        recyclerViewAssignments.setAdapter(assignmentAdapter);
         //set up dropdown
-        Spinner dropdown = view.findViewById(R.id.examsDropDown);
+        Spinner dropdown = view.findViewById(R.id.assignmentsDropDown);
         List<String> classesOptions = ClassesFragment2.classStringList;
         List<ClassesData> classDataOptions = ClassesFragment2.classList;
 
@@ -200,47 +197,46 @@ public class ExamsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentClassData = classDataOptions.get(position);
-                List<Exam> currentExamList = currentClassData.getExamList();
+                List<Assignment> currentAssignmentList = currentClassData.getAssignmentList();
                 classSelected = true;
 
-                examAdapter.updateData(currentExamList);
+                assignmentAdapter.updateData(currentAssignmentList);
             }
 
             public void onNothingSelected(AdapterView<?> parentView) {
-                examAdapter.updateData(defaultList);
+                assignmentAdapter.updateData(defaultList);
                 classSelected = false;
             }
         });
 
 
 
-        //set up add exam button
-        Button addExam = view.findViewById(R.id.addExam);
+        //set up add assignment button
+        Button addAssignment = view.findViewById(R.id.addAssignment);
 
 
-        addExam.setOnClickListener(new View.OnClickListener() {
+        addAssignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!classSelected) {
                     Toast noneSelected = Toast.makeText(getContext(), "No class selected to add class to!", Toast.LENGTH_LONG);
                     noneSelected.show();
                 } else {
-                    examSettings.setVisibility(View.VISIBLE);
-                    examList.setVisibility(View.GONE);
+                    assignmentSettings.setVisibility(View.VISIBLE);
+                    assignmentList.setVisibility(View.GONE);
                 }
 
             }
         });
 
         //set up edit text
-        topicEdt = view.findViewById(R.id.idEdtExamTopic);
-        dateEdt = view.findViewById(R.id.idEdtExamDate);
-        dayEdt = view.findViewById(R.id.idEdtExamDateDay);
-        timeEdt = view.findViewById(R.id.idEdtExamTime);
-        locationEdt = view.findViewById(R.id.idEdtExamLocation);
+        topicEdt = view.findViewById(R.id.idEdtAssignmentTopic);
+        dateEdt = view.findViewById(R.id.idEdtAssignmentDate);
+        dayEdt = view.findViewById(R.id.idEdtAssignmentDateDay);
+        timeEdt = view.findViewById(R.id.idEdtAssignmentTime);
 
         //set up confirm add button
-        Button confirmAdd = view.findViewById(R.id.addConfirm);
+        Button confirmAdd = view.findViewById(R.id.addConfirmAssignment);
 
 
         confirmAdd.setOnClickListener(new View.OnClickListener() {
@@ -264,18 +260,17 @@ public class ExamsFragment extends Fragment {
                 }
 
                 String time = timeEdt.getText().toString();
-                String location = locationEdt.getText().toString();
                 if ((topic.compareTo("") == 0) || (month == 0) || (day == 0)
-                        || (time.compareTo("") == 0) || (location.compareTo("") == 0)) {
+                        || (time.compareTo("") == 0)) {
                     Toast noneSelected = Toast.makeText(getContext(), "One or more fields are empty or invalid!", Toast.LENGTH_LONG);
                     noneSelected.show();
                 } else {
-                    Exam newExam = new Exam(topic, month, day, time, location);
-                    currentClassData.addExam(newExam);
-                    examAdapter.updateData(currentClassData.examList);
+                    Assignment newAssignment = new Assignment(topic, month, day, time);
+                    currentClassData.addAssignment(newAssignment);
+                    assignmentAdapter.updateData(currentClassData.assignmentList);
 
-                    examSettings.setVisibility(View.GONE);
-                    examList.setVisibility(View.VISIBLE);
+                    assignmentSettings.setVisibility(View.GONE);
+                    assignmentList.setVisibility(View.VISIBLE);
                 }
 
             }
