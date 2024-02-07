@@ -7,6 +7,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
 
+import com.example.a2340project1.todolist.Adapter.ToDoAdapter;
+import com.example.a2340project1.todolist.AddNewTask;
+import com.example.a2340project1.todolist.Model.ToDoModel;
+import com.example.a2340project1.todolist.RecyclerItemTouchHelper;
+import com.example.a2340project1.todolist.Utils.DatabaseHandler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -16,9 +22,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2340project1.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
     private Spinner dropdown;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
+    private RecyclerView tasksRecyclerView;
+
+    private ToDoAdapter tasksAdapter;
+
+    private List<ToDoModel> taskList;
+
+    private DatabaseHandler db;
+
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +68,37 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        db = new DatabaseHandler(this);
+        db.openDatabase();
+
+        taskList = new ArrayList<>();
+
+        tasksRecyclerView = findViewById(R.id.mySuperSlayToDoList);
+        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tasksAdapter = new ToDoAdapter(db, MainActivity.this);
+        tasksRecyclerView.setAdapter(tasksAdapter);
+
+
+
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
+
+        fab = findViewById(R.id.fab);
+
+        taskList = db.getAllTasks();
+        Collections.reverse(taskList);
+        tasksAdapter.setTasks(taskList);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
+            }
+
+        });
+
 
 
     }

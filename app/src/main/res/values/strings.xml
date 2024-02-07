@@ -35,4 +35,5 @@
     <string name="enter_assignment_due_time">Enter Assignment Due Time</string>
     <string name="add_assignment">Add Assignment</string>
     <string name="choose_class">Choose a class to view and add assignments for:</string>
+    <string name="todo_header">Add a task to do!</string>
 </resources>
